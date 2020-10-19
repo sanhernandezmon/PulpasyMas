@@ -23,7 +23,7 @@ public class ClienteService {
 
     public Cliente addCliente(Cliente cliente) {
         for (Cliente c : clienteDAO.getAllClientes()) {
-            if (c.getEmail().equals(cliente.getName())) {
+            if (c.getName().equals(cliente.getName())) {
                 System.out.println("ya existe un usuario registrado con este correo, por favor intenta te nuevo");
                 return null;
             }
