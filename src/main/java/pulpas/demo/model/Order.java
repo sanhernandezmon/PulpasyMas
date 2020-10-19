@@ -7,11 +7,11 @@ import java.util.Date;
 
 public class Order {
 
+    private String id;
     private String clienteID;
     private Date fechaPedido;
     private Date fechaEntrega;
     private ArrayList <Product> products;
-    private String factura;
     private Double precioMinimo;
 
 
@@ -28,20 +28,27 @@ public class Order {
         this.fechaPedido = fechaPedido;
         this.fechaEntrega = fechaEntrega;
         this.products = products;
-        this.factura = null;
         this.precioMinimo = 0.0;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "clienteID='" + clienteID + '\'' +
+                "id='" + id + '\'' +
+                ", clienteID='" + clienteID + '\'' +
                 ", fechaPedido=" + fechaPedido +
                 ", fechaEntrega=" + fechaEntrega +
                 ", products=" + products +
-                ", factura='" + factura + '\'' +
                 ", precioMinimo=" + precioMinimo +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getClienteID() {
@@ -74,14 +81,6 @@ public class Order {
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
-    }
-
-    public String getFactura() {
-        return factura;
-    }
-
-    public void setFactura(String factura) {
-        this.factura = factura;
     }
 
     public Double getPrecioMinimo() {

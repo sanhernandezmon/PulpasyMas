@@ -94,7 +94,8 @@ public class ProductFirestoreDAO implements ProductDAO {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        return products;    }
+        return products;
+    }
 
     @Override
     public int agregarProducto(String id) {
@@ -107,7 +108,7 @@ public class ProductFirestoreDAO implements ProductDAO {
             document = future.get();
             if (document.exists()) {
                 ret = document.toObject(Product.class);
-                ret.setDisponivilidad(ret.getDisponibilidad()+1);
+                Objects.requireNonNull(ret).setDisponivilidad(ret.getDisponibilidad()+1);
                 ref.set(ret);
             } else {
                 System.out.println("No such document for this product!");
@@ -115,7 +116,7 @@ public class ProductFirestoreDAO implements ProductDAO {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        return ret.getDisponibilidad();
+        return Objects.requireNonNull(ret).getDisponibilidad();
     }
 
     @Override
@@ -129,7 +130,7 @@ public class ProductFirestoreDAO implements ProductDAO {
             document = future.get();
             if (document.exists()) {
                 ret = document.toObject(Product.class);
-                ret.setDisponivilidad(ret.getDisponibilidad()-1);
+                Objects.requireNonNull(ret).setDisponivilidad(ret.getDisponibilidad()-1);
                 ref.set(ret);
             } else {
                 System.out.println("No such document for this product!");
@@ -137,6 +138,6 @@ public class ProductFirestoreDAO implements ProductDAO {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        return ret.getDisponibilidad();
+        return Objects.requireNonNull(ret).getDisponibilidad();
     }
 }
