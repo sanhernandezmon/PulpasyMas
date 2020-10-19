@@ -2,8 +2,6 @@ package pulpas.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-
 public class Product {
 
     private String id;
@@ -11,7 +9,7 @@ public class Product {
     private String especificacion;
     private int presentacion;
     private double valorUnitario;
-    private int disponivilidad;
+    private int disponibilidad;
 
     public Product() {
 
@@ -25,7 +23,6 @@ public class Product {
         this.especificacion = especificacion;
         this.presentacion = presentacion;
         this.valorUnitario = valorUnitario;
-        this.disponivilidad = 0;
 
     }
 
@@ -70,11 +67,11 @@ public class Product {
     }
 
     public int getDisponibilidad() {
-        return disponivilidad;
+        return disponibilidad;
     }
 
-    public void setDisponivilidad(int disponivilidad) {
-        this.disponivilidad = disponivilidad;
+    public void setDisponibilidad(int disponivilidad) {
+        this.disponibilidad = disponivilidad;
     }
 
 

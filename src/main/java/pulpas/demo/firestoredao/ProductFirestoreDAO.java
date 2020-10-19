@@ -108,7 +108,7 @@ public class ProductFirestoreDAO implements ProductDAO {
             document = future.get();
             if (document.exists()) {
                 ret = document.toObject(Product.class);
-                Objects.requireNonNull(ret).setDisponivilidad(ret.getDisponibilidad()+1);
+                Objects.requireNonNull(ret).setDisponibilidad(ret.getDisponibilidad()+1);
                 ref.set(ret);
             } else {
                 System.out.println("No such document for this product!");
@@ -123,15 +123,14 @@ public class ProductFirestoreDAO implements ProductDAO {
     public int quitarProducto(String id) {
         Firestore db = FirestoreClient.getFirestore();
         DocumentReference ref = db.collection("product").document(id);
-        ApiFuture<DocumentSnapshot> future = ref.get();
         DocumentSnapshot document;
         Product ret = null;
         try {
-            document = future.get();
+            document = ref.get().get();
             if (document.exists()) {
                 ret = document.toObject(Product.class);
                 if(Objects.requireNonNull(ret).getDisponibilidad()>=1) {
-                    Objects.requireNonNull(ret).setDisponivilidad(ret.getDisponibilidad() - 1);
+                    Objects.requireNonNull(ret).setDisponibilidad(ret.getDisponibilidad() - 1);
                     ref.set(ret);
                 }else{
                     System.out.println("No such disponivility of this product");

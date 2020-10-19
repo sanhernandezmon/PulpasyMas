@@ -72,6 +72,6 @@ public class Orderservice {
             productDAO.quitarProducto(p.getId());
             ValorMinimo = ValorMinimo + p.getValorUnitario();
         }
-        return orderDAO.actualizarProductosOrdenados(id,productos);
+        return orderDAO.actualizarProductosOrdenados(id,productos,ValorMinimo);
     }
 }

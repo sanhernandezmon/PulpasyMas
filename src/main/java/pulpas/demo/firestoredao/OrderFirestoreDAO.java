@@ -124,7 +124,7 @@ public class OrderFirestoreDAO implements OrderDAO {
     }
 
     @Override
-    public Order actualizarProductosOrdenados(String id, ArrayList<String> productos) {
+    public Order actualizarProductosOrdenados(String id, ArrayList<String> productos, double valorMinimo) {
         Firestore db = FirestoreClient.getFirestore();
         DocumentReference ref = db.collection("order").document(id);
         ApiFuture<DocumentSnapshot> future = ref.get();
@@ -135,6 +135,7 @@ public class OrderFirestoreDAO implements OrderDAO {
             if (document.exists()) {
                 ret = document.toObject(Order.class);
                 Objects.requireNonNull(ret).setProducts(productos);
+                Objects.requireNonNull(ret).setPrecioMinimo(valorMinimo);
                 ref.set(ret);
             } else {
                 System.out.println("No such document for this order!");
