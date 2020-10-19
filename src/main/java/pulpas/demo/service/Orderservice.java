@@ -57,6 +57,21 @@ public class Orderservice {
     }
 
     public  Order actualizarProductosOrdenados(String id, ArrayList<String> productos){
+        Order o = orderDAO.getOrder(id);
+        //desasignamos los pedidos que tenga
+
+        for (String product: o.getProducts()) {
+            Product p = productDAO.getProduct(product);
+            productDAO.agregarProducto(p.getId());
+        }
+
+        //Asignamos los nuevos productos y calculamos su valor minimo
+        double ValorMinimo = 0;
+        for (String product: productos) {
+            Product p = productDAO.getProduct(product);
+            productDAO.quitarProducto(p.getId());
+            ValorMinimo = ValorMinimo + p.getValorUnitario();
+        }
         return orderDAO.actualizarProductosOrdenados(id,productos);
     }
 }
