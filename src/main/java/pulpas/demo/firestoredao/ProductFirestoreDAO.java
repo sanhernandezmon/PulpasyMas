@@ -130,8 +130,12 @@ public class ProductFirestoreDAO implements ProductDAO {
             document = future.get();
             if (document.exists()) {
                 ret = document.toObject(Product.class);
-                Objects.requireNonNull(ret).setDisponivilidad(ret.getDisponibilidad()-1);
-                ref.set(ret);
+                if(Objects.requireNonNull(ret).getDisponibilidad()>=1) {
+                    Objects.requireNonNull(ret).setDisponivilidad(ret.getDisponibilidad() - 1);
+                    ref.set(ret);
+                }else{
+                    System.out.println("No such disponivility of this product");
+                }
             } else {
                 System.out.println("No such document for this product!");
             }

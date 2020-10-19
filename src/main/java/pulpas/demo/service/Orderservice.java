@@ -6,6 +6,7 @@ import pulpas.demo.dao.ClienteDAO;
 import pulpas.demo.dao.OrderDAO;
 import pulpas.demo.dao.ProductDAO;
 import pulpas.demo.model.Order;
+import pulpas.demo.model.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +29,9 @@ public class Orderservice {
         ArrayList<String> products = order.getProducts();
         double ValorMinimo = 0;
         for (String product: products) {
-            ValorMinimo = ValorMinimo + productDAO.getProduct(product).getValorUnitario();
+            Product p = productDAO.getProduct(product);
+            productDAO.quitarProducto(p.getId());
+            ValorMinimo = ValorMinimo + p.getValorUnitario();
         }
         order.setPrecioMinimo(ValorMinimo);
         Order ret = orderDAO.createOrder(order);
