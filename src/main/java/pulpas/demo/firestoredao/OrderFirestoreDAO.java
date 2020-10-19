@@ -4,7 +4,9 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Repository;
+import pulpas.demo.dao.ClienteDAO;
 import pulpas.demo.dao.OrderDAO;
+import pulpas.demo.dao.ProductDAO;
 import pulpas.demo.model.ID;
 import pulpas.demo.model.Order;
 import pulpas.demo.model.Product;
@@ -16,6 +18,8 @@ import java.util.concurrent.ExecutionException;
 
 @Repository("OrdenFirestore")
 public class OrderFirestoreDAO implements OrderDAO {
+
+    private ProductDAO productDAO;
 
     public ID setOrderId() {
         ID ret = new ID();
@@ -38,21 +42,12 @@ public class OrderFirestoreDAO implements OrderDAO {
         return ret;
     }
 
-    public double calcularValorMinimo(Order o){
-        ArrayList<Product> products = o.getProducts();
-        double ret = 0.0;
-        for (Product product: products) {
-                ret = ret + product.getValorUnitario();
-        }
-        return ret;
-    }
 
     @Override
     public Order createOrder(Order o) {
         Firestore db = FirestoreClient.getFirestore();
         CollectionReference ref = db.collection("order");
         try {
-            o.setPrecioMinimo(calcularValorMinimo(o));
             o.setId(setOrderId().toString());
             ref.document(o.getId()).set(o).get();
             return o;

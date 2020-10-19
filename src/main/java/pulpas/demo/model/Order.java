@@ -11,7 +11,7 @@ public class Order {
     private String clienteID;
     private Date fechaPedido;
     private Date fechaEntrega;
-    private ArrayList <Product> products;
+    private ArrayList <String> products;
     private Double precioMinimo;
 
 
@@ -21,7 +21,7 @@ public class Order {
     public Order(@JsonProperty("cliente") String clienteID,
                  @JsonProperty("fechapedido") Date fechaPedido,
                  @JsonProperty("fechaentrega") Date fechaEntrega,
-                 @JsonProperty("productos") ArrayList<Product> products
+                 @JsonProperty("productos") ArrayList<String> products
                  ) {
 
         this.clienteID = clienteID;
@@ -75,11 +75,11 @@ public class Order {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList<String> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ArrayList<String> products) {
         this.products = products;
     }
 

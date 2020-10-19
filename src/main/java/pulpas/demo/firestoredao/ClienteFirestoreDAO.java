@@ -6,6 +6,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Repository;
+import pulpas.demo.model.Product;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -65,6 +66,50 @@ public class ClienteFirestoreDAO implements ClienteDAO {
             e.printStackTrace();
         }
         return clientes;
+    }
+
+    @Override
+    public int agregarOrden(String name) {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentReference ref = db.collection("client").document(name);
+        ApiFuture<DocumentSnapshot> future = ref.get();
+        DocumentSnapshot document;
+        Cliente ret = null;
+        try {
+            document = future.get();
+            if (document.exists()) {
+                ret = document.toObject(Cliente.class);
+                Objects.requireNonNull(ret).setNumberOfOrdersDone(ret.getNumberOfOrdersDone()+1);
+                ref.set(ret);
+            } else {
+                System.out.println("No such document for this product!");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return Objects.requireNonNull(ret).getNumberOfOrdersDone();
+    }
+
+    @Override
+    public int eliminarOrden(String name) {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentReference ref = db.collection("client").document(name);
+        ApiFuture<DocumentSnapshot> future = ref.get();
+        DocumentSnapshot document;
+        Cliente ret = null;
+        try {
+            document = future.get();
+            if (document.exists()) {
+                ret = document.toObject(Cliente.class);
+                Objects.requireNonNull(ret).setNumberOfOrdersDone(ret.getNumberOfOrdersDone()-1);
+                ref.set(ret);
+            } else {
+                System.out.println("No such document for this product!");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return Objects.requireNonNull(ret).getNumberOfOrdersDone();
     }
 
 

@@ -14,4 +14,8 @@ public interface ClienteDAO {
 
     ArrayList<Cliente> getAllClientes();
 
+    int agregarOrden(String name);
+
+    int eliminarOrden(String name);
+
 }
