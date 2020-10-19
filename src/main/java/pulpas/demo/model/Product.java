@@ -5,29 +5,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 public class Product {
+
     private String id;
-    private String categoria;
-    private ArrayList<String> productNames;
+    private String tipo;
+    private String especificacion;
+    private int presentacion;
+    private double valorUnitario;
+    private int disponivilidad;
 
     public Product() {
 
     }
 
-    public Product(@JsonProperty String id,
-                   @JsonProperty String categoria,
-                   @JsonProperty ArrayList<String> productNames) {
-        this.id = id;
-        this.categoria = categoria;
-        this.productNames = productNames;
-    }
+    public Product(@JsonProperty String tipo,
+                   @JsonProperty String especificacion,
+                   @JsonProperty int presentacion,
+                   @JsonProperty double valorUnitario) {
+        this.tipo = tipo;
+        this.especificacion = especificacion;
+        this.presentacion = presentacion;
+        this.valorUnitario = valorUnitario;
+        this.disponivilidad = 0;
 
-    @Override
-    public String toString() {
-        return "Producto{" +
-            "id=" + id +
-            ", categoria='" + categoria + '\'' +
-            ", productos=" + productNames +
-            '}';
     }
 
     public String getId() {
@@ -38,19 +37,45 @@ public class Product {
         this.id = id;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public ArrayList<String> getProductNames() {
-        return productNames;
+    public String getEspecificacion() {
+        return especificacion;
     }
 
-    public void setProductNames(ArrayList<String> productos) {
-        this.productNames = productos;
+    public void setPresentacion(int presentacion) {
+        this.presentacion = presentacion;
     }
+
+    public int getPresentacion() {
+        return presentacion;
+    }
+
+    public void setEspecificacion(String especificacion) {
+        this.especificacion = especificacion;
+    }
+
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public int getDisponibilidad() {
+        return disponivilidad;
+    }
+
+    public void setDisponivilidad(int disponivilidad) {
+        this.disponivilidad = disponivilidad;
+    }
+
+
 }
