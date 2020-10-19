@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import pulpas.demo.model.Order;
 import pulpas.demo.service.Orderservice;
 
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
+import java.util.Date;
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/orden")
@@ -37,4 +39,13 @@ public class OrderAPI {
     public Order getCliente(@PathVariable String id){
         return orderservice.getOrder(id);
     }
+
+    @PutMapping("entregar/{id}")
+    public Date entregarOrden(@PathVariable String id){return orderservice.entregarOrden(id); }
+
+    @PutMapping("pedidos/{id}")
+    public Order actualizarProductosOrdenados(@PathVariable String id , @RequestBody ArrayList<String> productos){
+        return orderservice.actualizarProductosOrdenados(id,productos); }
+
+
 }

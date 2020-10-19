@@ -19,14 +19,12 @@ public class Order {
     }
 
     public Order(@JsonProperty("cliente") String clienteID,
-                 @JsonProperty("fechapedido") Date fechaPedido,
-                 @JsonProperty("fechaentrega") Date fechaEntrega,
                  @JsonProperty("productos") ArrayList<String> products
                  ) {
 
         this.clienteID = clienteID;
-        this.fechaPedido = fechaPedido;
-        this.fechaEntrega = fechaEntrega;
+        this.fechaPedido = new Date(System.currentTimeMillis());
+        this.fechaEntrega = null;
         this.products = products;
         this.precioMinimo = 0.0;
     }

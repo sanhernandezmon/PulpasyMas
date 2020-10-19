@@ -4,6 +4,7 @@ import pulpas.demo.model.Order;
 import pulpas.demo.model.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface OrderDAO {
     Order createOrder(Order o);
@@ -14,4 +15,7 @@ public interface OrderDAO {
 
     ArrayList<Order> getAllOrders();
 
+    Date entregarOrden(String id);
+
+    Order actualizarProductosOrdenados(String id, ArrayList<String> productos);
 }

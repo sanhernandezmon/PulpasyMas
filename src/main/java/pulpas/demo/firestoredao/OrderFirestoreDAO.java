@@ -12,6 +12,7 @@ import pulpas.demo.model.Order;
 import pulpas.demo.model.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -100,5 +101,49 @@ public class OrderFirestoreDAO implements OrderDAO {
             e.printStackTrace();
         }
         return orders;
+    }
+
+    @Override
+    public Date entregarOrden(String id) {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentReference ref = db.collection("order").document(id);
+        ApiFuture<DocumentSnapshot> future = ref.get();
+        DocumentSnapshot document;
+        Order ret = null;
+        try {
+            document = future.get();
+            if (document.exists()) {
+                ret = document.toObject(Order.class);
+                Objects.requireNonNull(ret).setFechaEntrega(new Date(System.currentTimeMillis()));
+                ref.set(ret);
+            } else {
+                System.out.println("No such document for this order!");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return Objects.requireNonNull(ret).getFechaEntrega();
+    }
+
+    @Override
+    public Order actualizarProductosOrdenados(String id, ArrayList<String> productos) {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentReference ref = db.collection("order").document(id);
+        ApiFuture<DocumentSnapshot> future = ref.get();
+        DocumentSnapshot document;
+        Order ret = null;
+        try {
+            document = future.get();
+            if (document.exists()) {
+                ret = document.toObject(Order.class);
+                Objects.requireNonNull(ret).setProducts(productos);
+                ref.set(ret);
+            } else {
+                System.out.println("No such document for this order!");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 }

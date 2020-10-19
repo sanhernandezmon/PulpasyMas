@@ -8,6 +8,7 @@ import pulpas.demo.dao.ProductDAO;
 import pulpas.demo.model.Order;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class Orderservice {
@@ -46,5 +47,13 @@ public class Orderservice {
     public boolean deleteOrder(String id) {
         clienteDAO.eliminarOrden(orderDAO.getOrder(id).getClienteID());
         return orderDAO.deleteOrder(id);
+    }
+
+    public Date entregarOrden(String id){
+        return orderDAO.entregarOrden(id);
+    }
+
+    public  Order actualizarProductosOrdenados(String id, ArrayList<String> productos){
+        return orderDAO.actualizarProductosOrdenados(id,productos);
     }
 }
