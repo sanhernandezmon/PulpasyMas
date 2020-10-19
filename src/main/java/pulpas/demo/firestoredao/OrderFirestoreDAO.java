@@ -4,12 +4,10 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Repository;
-import pulpas.demo.dao.ClienteDAO;
 import pulpas.demo.dao.OrderDAO;
 import pulpas.demo.dao.ProductDAO;
 import pulpas.demo.model.ID;
 import pulpas.demo.model.Order;
-import pulpas.demo.model.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
