@@ -15,7 +15,7 @@ public class FirebaseInit {
     @PostConstruct
     public void init() throws IOException {
         FileInputStream serviceAccount =
-                new FileInputStream("pulpas/demo/firebase-adminsdk.json");
+                new FileInputStream("src/firebase-adminsdk.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))

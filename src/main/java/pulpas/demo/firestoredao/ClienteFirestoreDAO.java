@@ -7,6 +7,7 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -15,17 +16,16 @@ import java.util.concurrent.ExecutionException;
 @Repository("ClienteFirestore")
 public class ClienteFirestoreDAO implements ClienteDAO {
 
-    private final Firestore db = FirestoreClient.getFirestore();
-
-
     @Override
     public Cliente createCliente(Cliente c) {
+        Firestore db = FirestoreClient.getFirestore();
         db.collection("client").document(c.getName()).set(c);
         return c;
     }
 
     @Override
     public Cliente getCliente(String name) {
+        Firestore db = FirestoreClient.getFirestore();
         DocumentReference ref = db.collection("client").document(name);
         ApiFuture<DocumentSnapshot> future = ref.get();
         DocumentSnapshot document;
@@ -45,6 +45,7 @@ public class ClienteFirestoreDAO implements ClienteDAO {
 
     @Override
     public boolean deleteCliente(String name) {
+        Firestore db = FirestoreClient.getFirestore();
         db.collection("client").document(name).delete();
         return true;
     }

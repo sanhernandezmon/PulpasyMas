@@ -8,11 +8,11 @@
         <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>agricolab</groupId>
+    <groupId>PulpasyMas</groupId>
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>AgriColab App</name>
-    <description>AgriColab project app</description>
+    <name>Pulpas y mas</name>
+    <description>admin project app</description>
 
     <properties>
         <java.version>1.8</java.version>

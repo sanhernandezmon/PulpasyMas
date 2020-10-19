@@ -2,7 +2,6 @@ package pulpas.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Date;
 

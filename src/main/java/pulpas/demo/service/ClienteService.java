@@ -1,7 +1,7 @@
 package pulpas.demo.service;
 
 
-import pulpas.demo.dao.*;
+import pulpas.demo.dao.ClienteDAO;
 import pulpas.demo.model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,8 +22,8 @@ public class ClienteService {
     }
 
     public Cliente addCliente(Cliente cliente) {
-        for (Cliente u : clienteDAO.getAllClientes()) {
-            if (u.getEmail().equals(cliente.getName())) {
+        for (Cliente c : clienteDAO.getAllClientes()) {
+            if (c.getEmail().equals(cliente.getName())) {
                 System.out.println("ya existe un usuario registrado con este correo, por favor intenta te nuevo");
                 return null;
             }
